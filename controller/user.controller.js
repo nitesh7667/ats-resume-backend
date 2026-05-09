@@ -49,7 +49,7 @@ export const login = async (req, res) => {
 
 export const logout = async (req, res) => {
     try {
-        const token = req.cookies?.token;
+        const token = req.cookies?.token || (req.headers.authorization && req.headers.authorization.split(" ")[1]);
         if (token) {
             await BlacklistToken.create({ token });
         }
